@@ -218,6 +218,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1317525457}
   - {fileID: 685763120}
   - {fileID: 332569021}
   - {fileID: 191549467}
@@ -248,16 +249,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c903ca89e2dd7c4f9faf17986ae531c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabbutton1: {fileID: 254038575}
-  tabbutton2: {fileID: 834278018}
-  tabbutton3: {fileID: 1709002213}
-  tabbutton4: {fileID: 982833332}
-  tabbutton5: {fileID: 1575032164}
-  tabcontent1: {fileID: 685763119}
-  tabcontent2: {fileID: 332569020}
-  tabcontent3: {fileID: 191549466}
-  tabcontent4: {fileID: 1788506638}
-  tabcontent5: {fileID: 532804178}
+  tabButtons:
+  - {fileID: 254038575}
+  - {fileID: 834278018}
+  - {fileID: 1709002213}
+  - {fileID: 982833332}
+  - {fileID: 1575032164}
+  tabContents:
+  - {fileID: 685763119}
+  - {fileID: 332569020}
+  - {fileID: 191549466}
+  - {fileID: 1788506638}
+  - {fileID: 532804178}
 --- !u!1 &70688578
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,8 +709,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4095388}
         m_TargetAssemblyTypeName: MainTabs, Assembly-CSharp
-        m_MethodName: ShowTab1
-        m_Mode: 1
+        m_MethodName: ShowTab
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1866,7 +1869,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1317525457}
   - {fileID: 1169622393}
   m_Father: {fileID: 4095387}
   m_RootOrder: -1
@@ -2352,10 +2354,10 @@ RectTransform:
   m_Father: {fileID: 1317525457}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.000019073}
-  m_SizeDelta: {x: 255.046, y: 94.2527}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 150, y: -0.000019073486}
+  m_SizeDelta: {x: 255.04602, y: 94.2527}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &827674339
 MonoBehaviour:
@@ -2404,8 +2406,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90
-  m_fontSizeBase: 90
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2540,12 +2542,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4095388}
         m_TargetAssemblyTypeName: MainTabs, Assembly-CSharp
-        m_MethodName: ShowTab2
-        m_Mode: 1
+        m_MethodName: ShowTab
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2674,12 +2676,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4095388}
         m_TargetAssemblyTypeName: MainTabs, Assembly-CSharp
-        m_MethodName: ShowTab4
-        m_Mode: 1
+        m_MethodName: ShowTab
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2887,13 +2889,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 827674338}
-  m_Father: {fileID: 685763120}
+  m_Father: {fileID: 4095387}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 261.89087, y: 524.94073}
-  m_SizeDelta: {x: 445.2639, y: 239.8164}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0001, y: 885}
+  m_SizeDelta: {x: 583.6935, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1317525458
 MonoBehaviour:
@@ -3103,12 +3105,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4095388}
         m_TargetAssemblyTypeName: MainTabs, Assembly-CSharp
-        m_MethodName: ShowTab5
-        m_Mode: 1
+        m_MethodName: ShowTab
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3305,12 +3307,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4095388}
         m_TargetAssemblyTypeName: MainTabs, Assembly-CSharp
-        m_MethodName: ShowTab3
-        m_Mode: 1
+        m_MethodName: ShowTab
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

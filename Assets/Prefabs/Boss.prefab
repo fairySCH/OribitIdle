@@ -96,7 +96,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3689774618091257737}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -276,5 +276,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8211500928027148398, guid: 904867b0fd38aa746aeabd69d9efa69e, type: 3}
   shootTransform: {fileID: 8411891349323260772, guid: f2c23db447dba354b9ad7874b60add45, type: 3}
-  bulletSpeed: 10
+  bulletSpeed: 4
   attackInterval: 1

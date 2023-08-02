@@ -1,36 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Character : MonoBehaviour
 {
-    public Transform center;    // 원운동 중심점
-    public float radius = 2.0f; // 반지름
-    public float speed = 2.0f;  // 속도
-    private float angle = Mathf.PI*3/2; // 각속도 구현용, 각도를 정의
+    public Transform center;
+    public float radius = 2.0f;
+    public float speed = 2.0f;
+    private float angle; // Removed the property for starting angle
 
     [SerializeField]
-    public GameObject weapon; // 무기 선언
+    public GameObject weapon;
     [SerializeField]
-    private Transform shootTransform; // 총알 발사 위치 == 캐릭터 위치
+    private Transform shootTransform;
 
     [SerializeField]
-    private float shootInterval = 0.05f; // 발사하는 간격 조절
-    private float lastShotTime = 0f; // 현재 시간을 계산해 일정하게 총알 발사하도록 함
+    private float shootInterval = 0.05f;
+    private float lastShotTime = 0f;
+
+    private Vector2 velocity;
+    private float angularSpeed;
+
+    public Vector2 Velocity
+    {
+        get { return velocity; }
+    }
+
+    public float AngularSpeed
+    {
+        get { return angularSpeed; }
+    }
+
+    private float maxHp = 100f; // 캐릭터 최대 체력
+    private float currentHp; // 현재 체력
+
+    public float WeaponDamage { get; private set; } = 10f; // 무기 데미지
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        angle = Mathf.PI * 3 / 2; // 시작 위치 초기화
+        currentHp = maxHp; // 체력 초기화
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-        angle += speed * Time.deltaTime; // 원운동 속도에 비례하게 각도가 커짐. (각속도)
-        transform.position = center.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius; // 원의 중심으로부터 반지름만큼의 거리를 유지한채 회전.
+        angle += speed * Time.deltaTime;
+        transform.position = center.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
+
+        velocity = new Vector2(-radius * speed * Mathf.Sin(angle), radius * speed * Mathf.Cos(angle));
+        angularSpeed = speed;
+        
         Shoot();
     }
-    // 총알 발사 구현
-    void Shoot() {
-        if (Time.time - lastShotTime > shootInterval) {
+
+    void Shoot()
+    {
+        if (Time.time - lastShotTime > shootInterval)
+        {
             Instantiate(weapon, shootTransform.position, Quaternion.identity);
             lastShotTime = Time.time;
         }
     }
-    
+
+    public void TakeDamage(float damage) // 캐릭터 데미지 받는 함수.
+    {
+        currentHp -= damage;
+        if (currentHp <= 0)
+        {
+            // 캐릭터 사망 처리
+            Destroy(gameObject);
+            GameManager.instance.RestartStage(); // GameManager의 RestartStage
+        }
+    }
 }

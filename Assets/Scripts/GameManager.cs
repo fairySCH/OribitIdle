@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     private int enemiesDefeated = 0;
     private int enemiesToRespawn = 1; // 한 번에 하나의 적만 소환하도록 변경
     private int enemyCounter = 0; // 이번 스테이지에서 처치한 적의 수
+
+    public Character character; // 캐릭터 객체
     void Awake() {
         if (instance == null) 
         {
@@ -71,21 +73,21 @@ public class GameManager : MonoBehaviour
     public void EnemyDefeated()
     {
         if (!isBossAlive)
-    {
-        enemiesDefeated++;
-        enemyCounter++;
+        {
+            enemiesDefeated++;
+            enemyCounter++;
 
-        if (enemyCounter == 25)
-        {
-            SpawnBoss();
-            enemyCounter = 0; // 보스가 소환되면 적 처치 수를 초기화
+            if (enemyCounter == 25)
+            {
+                SpawnBoss();
+                enemyCounter = 0; // 보스가 소환되면 적 처치 수를 초기화
+            }
+            else if (enemiesDefeated >= enemiesToRespawn)
+            {
+                enemiesDefeated = 0;
+                SpawnEnemies();
+            }
         }
-        else if (enemiesDefeated >= enemiesToRespawn)
-        {
-            enemiesDefeated = 0;
-            SpawnEnemies();
-        }
-    }
     }
     public void BossDefeated()
     {
@@ -96,7 +98,8 @@ public class GameManager : MonoBehaviour
         stageCounter++;
         SpawnEnemies();
     }
-    void RestartStage()
+
+    public void RestartStage()
     {
         // 보스를 처치하지 못했을 때 스테이지 재시작
         isBossAlive = false;
@@ -112,10 +115,12 @@ public class GameManager : MonoBehaviour
 
         SpawnEnemies();
     }
+
     public void IncreaseMoney(int reward) {
         money += reward;
         text.SetText(money.ToString());
     }
+
     public void UpgradeBulletDamage() {
         int upgradecost = 50;
 
@@ -124,5 +129,13 @@ public class GameManager : MonoBehaviour
             money -= upgradecost;
             text.SetText(money.ToString());
         }
+    }
+    
+    public void CharacterDied()
+    {
+        // 캐릭터 사망 시 호출되는 함수
+        // 여기에 게임 오버 처리 등을 추가할 수 있습니다.
+        Debug.Log("게임 오버");
+        // 예를 들어 게임 오버 화면을 표시하거나 게임을 재시작하는 로직을 추가할 수 있습니다.
     }
 }

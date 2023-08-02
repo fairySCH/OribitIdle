@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8611463324033622368}
   - component: {fileID: 358432432087545376}
   - component: {fileID: 3171393108218872400}
+  - component: {fileID: 3824463039890455837}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -261,3 +262,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxhp: 2500
   moneyReward: 250
+--- !u!114 &3824463039890455837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3689774618091257737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48891c89b38eb98479ff58a18e84bb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8211500928027148398, guid: 904867b0fd38aa746aeabd69d9efa69e, type: 3}
+  shootTransform: {fileID: 8411891349323260772, guid: f2c23db447dba354b9ad7874b60add45, type: 3}
+  bulletSpeed: 10
+  attackInterval: 1

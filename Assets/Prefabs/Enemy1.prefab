@@ -259,5 +259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae10edd3ea8ff22488bb27f5ea83f69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhp: 100
+  maxhp: 10
   moneyReward: 10
+  bossHpMultiplier: 0

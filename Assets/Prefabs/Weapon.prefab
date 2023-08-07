@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   portal: {fileID: 8411891349323260772, guid: f2c23db447dba354b9ad7874b60add45, type: 3}
+  damage: 10
 --- !u!58 &3092032230555326895
 CircleCollider2D:
   m_ObjectHideFlags: 0

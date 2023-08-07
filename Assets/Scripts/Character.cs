@@ -32,7 +32,7 @@ public class Character : MonoBehaviour
         get { return angularSpeed; }
     }
 
-    private float maxHp = 100f; // 캐릭터 최대 체력
+    public float maxHp = 100f; // 캐릭터 최대 체력
     private float currentHp; // 현재 체력
 
     public float WeaponDamage { get; private set; } = 10f; // 무기 데미지
@@ -71,9 +71,16 @@ public class Character : MonoBehaviour
         currentHp -= damage;
         if (currentHp <= 0)
         {
-            // 캐릭터 사망 처리
-            Destroy(gameObject);
             GameManager.instance.RestartStage(); // GameManager의 RestartStage
+            // "Weapon" 태그를 가진 모든 오브젝트를 찾습니다.
+            GameObject[] leftoverWeapons = GameObject.FindGameObjectsWithTag("Weapon");
+
+            // 모든 "Weapon" 오브젝트를 파괴합니다.
+            foreach (GameObject bullets in leftoverWeapons)
+            {
+                Destroy(bullets);
+            }
+            Start();
         }
     }
 }

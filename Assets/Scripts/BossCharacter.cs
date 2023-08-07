@@ -10,7 +10,7 @@ public class BossCharacter : MonoBehaviour
     public float bulletSpeed = 8f;
     public float attackInterval = 3f;
     private float attackTimer = 0f;
-    private float bulletDamage = 10f;
+    private float bulletDamage = 10f; // 보스의 공격 데미지
 
     private Transform playerTransform;
     private Vector3 lastKnownPlayerPosition;
@@ -44,7 +44,7 @@ public class BossCharacter : MonoBehaviour
         Vector3 fireDirection = (predictedPlayerPosition - shootTransform.position).normalized;
 
         GameObject bullet = Instantiate(bulletPrefab, shootTransform.position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().SetDamage(bulletDamage); // Set bullet damage based on character's weapon damage
+        bullet.GetComponent<Bullet>().SetDamage(bulletDamage); 
         bullet.GetComponent<Rigidbody2D>().velocity = fireDirection * bulletSpeed;
     }
 }

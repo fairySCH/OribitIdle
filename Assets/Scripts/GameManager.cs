@@ -8,24 +8,24 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     [SerializeField]
-    private TextMeshProUGUI text;
-    private int money = 0;
-    public static int stageCounter = 0;
-    private bool bossSpawned = false;
-    private bool isBossAlive = false;
-    private float bossTimeLimit = 30f;
-    private float currentBossTime = 0f;
+    private TextMeshProUGUI text; // 돈 보여주기?
+    private int money = 0; // 돈 선언 및 0 초기화
+    public static int stageCounter = 0; // 스테이지 수 변수
+    private bool bossSpawned = false; // 보스 소환 상태 저장
+    private bool isBossAlive = false; // 보스 생존여부 확인
+    private float bossTimeLimit = 30f; // 보스전 제한시간
+    private float currentBossTime = 0f; // 현재 보스전 진행 시간
 
-    public Enemy enemyPrefab;
-    public Enemy bossPrefab;
-    public Transform spawnPoint;
-
-    public Weapon weapon;
-    private int enemiesDefeated = 0;
+    public Enemy enemyPrefab; // 적 prefab
+    public Enemy bossPrefab; // 보스 prefab
+    public Transform spawnPoint; // 적 소환위치 transform
+    public Weapon weapon; // 무기 weapon 선언
+    public Character character; // 캐릭터 객체
+    
+    private int enemiesDefeated = 0; // 
     private int enemiesToRespawn = 1; // 한 번에 하나의 적만 소환하도록 변경
     private int enemyCounter = 0; // 이번 스테이지에서 처치한 적의 수
-
-    public Character character; // 캐릭터 객체
+    
     void Awake() {
         if (instance == null) 
         {
@@ -34,24 +34,20 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        SpawnEnemies();
+        SpawnEnemies(); // 게임 시작 시 적 소환으로 게임을 시작한다.
     }
     void Update()
     {
-        if (isBossAlive)
-        {
+        if (isBossAlive) {
             currentBossTime += Time.deltaTime;
-            if (currentBossTime >= bossTimeLimit)
-            {
+            if (currentBossTime >= bossTimeLimit) {
                 // 보스를 제한 시간 내에 처치하지 못했을 때
                 RestartStage();
             }
         }
     }
-    void SpawnEnemies()
-    {
-        
-        if (bossSpawned)
+    void SpawnEnemies() {
+        if (bossSpawned) // 보스가 소환되어있으면 보스를 소환 / 아니면 넘어감.
         {
             return;
         }
@@ -70,27 +66,22 @@ public class GameManager : MonoBehaviour
         bossSpawned = true;
         Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
     }
-    public void EnemyDefeated()
-    {
-        if (!isBossAlive)
-        {
+    public void EnemyDefeated() {
+        if (!isBossAlive) {
             enemiesDefeated++;
             enemyCounter++;
 
-            if (enemyCounter == 25)
-            {
+            if (enemyCounter == 25) {
                 SpawnBoss();
                 enemyCounter = 0; // 보스가 소환되면 적 처치 수를 초기화
-            }
-            else if (enemiesDefeated >= enemiesToRespawn)
-            {
+            } else if (enemiesDefeated >= enemiesToRespawn) {
                 enemiesDefeated = 0;
                 SpawnEnemies();
             }
         }
     }
     public void BossDefeated()
-    {
+    {   
         isBossAlive = false;
         bossSpawned = false;
         currentBossTime = 0f;
@@ -121,7 +112,7 @@ public class GameManager : MonoBehaviour
         text.SetText(money.ToString());
     }
 
-    public void UpgradeBulletDamage() {
+    public void UpgradeBulletDamage() { // 캐릭터 총알 데미지 업그레이드
         int upgradecost = 50;
 
         if (money >= upgradecost) {
@@ -130,7 +121,19 @@ public class GameManager : MonoBehaviour
             text.SetText(money.ToString());
         }
     }
+    public void UpgradeCharacterHp() { // 캐릭터 최대 체력 업그레이드
+        int hpUpgradeCost = 100;
+
+        if (money >= hpUpgradeCost) {
+            character.maxHp += 10;
+            money -= hpUpgradeCost;
+            text.SetText(money.ToString());
+        }
+    }    
     
+    public void ClearBoard() {
+        
+    }
     public void CharacterDied()
     {
         // 캐릭터 사망 시 호출되는 함수

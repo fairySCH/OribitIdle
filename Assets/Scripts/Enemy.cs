@@ -5,44 +5,83 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    public float maxhp = 100f; // 몬스터 기본 체력 = 100
+    private float maxhp = 100f; // Monster's default health = 100
     private float currentHp;
     [SerializeField]
-    public int moneyReward = 10;
+    public int moneyReward = 10; // 적 처치 보상금
+
+    [SerializeField]
+    private int bossHpMultiplier = 25; // 보스 체력 배수
+
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize current HP and health bar
         currentHp = maxhp * (GameManager.stageCounter + 1);
+
+        // Adjust current HP for Boss enemies
         if (gameObject.tag == "Boss")
         {
-            currentHp = maxhp * (GameManager.stageCounter + 1) * 25;
+            currentHp = maxhp * (GameManager.stageCounter + 1) * bossHpMultiplier;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        // Check if the enemy's current HP has dropped to or below 0
+        if (currentHp <= 0)
+        {
+            // Destroy the enemy gameObject
+            Destroy(gameObject);
+
+            // Increase player's money and handle defeated enemy
+            GameManager.instance.IncreaseMoney(moneyReward);
+
+            // Check if the defeated enemy is a Boss or regular enemy
+            if (gameObject.tag == "Boss")
+            {
+                GameManager.instance.BossDefeated();
+            }
+            else
+            {
+                GameManager.instance.EnemyDefeated();
+            }
+        }
     }
 
-    public void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "Weapon") {
-           Weapon weapon = other.gameObject.GetComponent<Weapon>();
+    // Called when the enemy collides with a trigger collider (e.g., a weapon)
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Weapon")
+        {
+            // Get the Weapon component from the collider's gameObject
+            Weapon weapon = other.gameObject.GetComponent<Weapon>();
+
+            // Decrease the enemy's current HP based on the weapon's damage
             currentHp -= weapon.damage;
+
+            // Check if the enemy's current HP has dropped to or below 0 after the attack
             if (currentHp <= 0)
             {
+                // Destroy the enemy gameObject
                 Destroy(gameObject);
+
+                // Increase player's money and handle defeated enemy
                 GameManager.instance.IncreaseMoney(moneyReward);
+
+                // Check if the defeated enemy is a Boss or regular enemy
                 if (gameObject.tag == "Boss")
                 {
                     GameManager.instance.BossDefeated();
-                } 
-                else 
-                {
-                    GameManager.instance.EnemyDefeated(); // 적 처치 시 GameManager의 함수 호출
                 }
-
+                else
+                {
+                    GameManager.instance.EnemyDefeated(); // Call GameManager's function upon enemy defeat
+                }
             }
+
+            // Destroy the weapon gameObject after the attack
             Destroy(other.gameObject);
         }
     }

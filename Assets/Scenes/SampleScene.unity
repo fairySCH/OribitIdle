@@ -793,6 +793,7 @@ MonoBehaviour:
   weapon: {fileID: 496536555526954850, guid: 7bea4dfd95e84dc428f18fbbb5397f1f, type: 3}
   shootTransform: {fileID: 501027042}
   shootInterval: 0.2
+  maxHp: 100
 --- !u!58 &70688582
 CircleCollider2D:
   m_ObjectHideFlags: 0

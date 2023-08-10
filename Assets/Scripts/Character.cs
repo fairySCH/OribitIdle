@@ -5,18 +5,16 @@ using TMPro;
 
 public class Character : MonoBehaviour
 {
+    Stats stat = new Stats();
     public Transform center;
     public float radius = 2.0f;
-    public float speed = 2.0f;
     private float angle; // Removed the property for starting angle
 
     [SerializeField]
     public GameObject weapon;
     [SerializeField]
     private Transform shootTransform;
-
-    [SerializeField]
-    private float shootInterval = 0.05f;
+    
     private float lastShotTime = 0f;
 
     private Vector2 velocity;
@@ -32,34 +30,31 @@ public class Character : MonoBehaviour
         get { return angularSpeed; }
     }
 
-    public float maxHp = 100f; // 캐릭터 최대 체력
     private float currentHp; // 현재 체력
-
-    public float WeaponDamage { get; private set; } = 10f; // 무기 데미지
 
     // Start is called before the first frame update
     void Start()
     {
         angle = Mathf.PI * 3 / 2; // 시작 위치 초기화
-        currentHp = maxHp; // 체력 초기화
+        currentHp = stat.Hp(); // 체력 초기화
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        angle += speed * Time.deltaTime;
+        angle += stat.SpinSpeed() * Time.deltaTime;
         transform.position = center.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
 
-        velocity = new Vector2(-radius * speed * Mathf.Sin(angle), radius * speed * Mathf.Cos(angle));
-        angularSpeed = speed;
+        velocity = new Vector2(-radius * stat.SpinSpeed() * Mathf.Sin(angle), radius * stat.SpinSpeed() * Mathf.Cos(angle));
+        angularSpeed = stat.SpinSpeed();
         
         Shoot();
     }
 
     void Shoot()
     {
-        if (Time.time - lastShotTime > shootInterval)
+        if (Time.time - lastShotTime > stat.FireRate())
         {
             Instantiate(weapon, shootTransform.position, Quaternion.identity);
             lastShotTime = Time.time;

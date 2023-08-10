@@ -8,8 +8,6 @@ public class Weapon : MonoBehaviour
     private float moveSpeed = 10f;
     [SerializeField]
     private Transform portal;
-    public float damage = 10f;
-
 
     // Start is called before the first frame update
     void Start()

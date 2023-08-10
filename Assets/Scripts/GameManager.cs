@@ -5,6 +5,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    Stats stat = new Stats();
     public static GameManager instance = null;
 
     [SerializeField]
@@ -116,7 +117,7 @@ public class GameManager : MonoBehaviour
         int upgradecost = 50;
 
         if (money >= upgradecost) {
-            weapon.damage += 10;
+            Stats.characterDamageLevel += 1;
             money -= upgradecost;
             text.SetText(money.ToString());
         }
@@ -125,8 +126,44 @@ public class GameManager : MonoBehaviour
         int hpUpgradeCost = 100;
 
         if (money >= hpUpgradeCost) {
-            character.maxHp += 10;
+            Stats.characterHpLevel += 1;
             money -= hpUpgradeCost;
+            text.SetText(money.ToString());
+        }
+    }
+    public void UpgradeCharacterFireRate() { // 총알 발사속도 업그레이드
+        int fireRateUpgradeCost = 100;
+
+        if (money >= fireRateUpgradeCost) {
+            Stats.characterFireRateLevel += 1;
+            money -= fireRateUpgradeCost;
+            text.SetText(money.ToString());
+        }
+    }    
+    public void UpgradeCharacterCriticalRate() { // 캐릭터 치명타율 업그레이드
+        int criticalRateUpgradeCost = 100;
+
+        if (money >= criticalRateUpgradeCost) {
+            Stats.characterCriticalRateLevel += 1;
+            money -= criticalRateUpgradeCost;
+            text.SetText(money.ToString());
+        }
+    }
+    public void UpgradeCharacterCriticalDamage() { // 캐릭터 치명타 데미지% 업그레이드
+        int criticalDamageUpgradeCost = 100;
+
+        if (money >= criticalDamageUpgradeCost) {
+            Stats.characterDamageLevel += 1;
+            money -= criticalDamageUpgradeCost;
+            text.SetText(money.ToString());
+        }
+    }        
+    public void UpgradeCharacterDefence() { // 캐릭터 방어력 업그레이드
+        int defenceUpgradeCost = 100;
+
+        if (money >= defenceUpgradeCost) {
+            Stats.characterDefenceLevel += 1;
+            money -= defenceUpgradeCost;
             text.SetText(money.ToString());
         }
     }    

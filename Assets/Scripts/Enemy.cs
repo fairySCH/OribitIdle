@@ -55,13 +55,9 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Weapon")
         {
-            // Get the Weapon component from the collider's gameObject
-            Weapon weapon = other.gameObject.GetComponent<Weapon>();
+            currentHp -= Stats.damage;
 
-            // Decrease the enemy's current HP based on the weapon's damage
-            currentHp -= weapon.damage;
-
-            // Check if the enemy's current HP has dropped to or below 0 after the attack
+            // 적 사망처리
             if (currentHp <= 0)
             {
                 // Destroy the enemy gameObject

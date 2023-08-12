@@ -10,7 +10,19 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI text; // 돈 보여주기?
-    private int money = 0; // 돈 선언 및 0 초기화
+    [SerializeField]
+    private TextMeshProUGUI DamageLevelText;
+    [SerializeField]
+    private TextMeshProUGUI HpLevelText;
+    [SerializeField]
+    private TextMeshProUGUI FireRateLevelText;
+    [SerializeField]
+    private TextMeshProUGUI CriticalRateLevelText;
+    [SerializeField]
+    private TextMeshProUGUI CriticalDamageLevelText;
+    [SerializeField]
+    private TextMeshProUGUI DefenceLevelText;
+    private int money = 99999; // 돈 선언 및 0 초기화
     public static int stageCounter = 0; // 스테이지 수 변수
     private bool bossSpawned = false; // 보스 소환 상태 저장
     private bool isBossAlive = false; // 보스 생존여부 확인
@@ -119,6 +131,7 @@ public class GameManager : MonoBehaviour
         if (money >= upgradecost) {
             Stats.characterDamageLevel += 1;
             money -= upgradecost;
+            UpdateDamageLevelUI(); // UI 업데이트 메서드 호출
             text.SetText(money.ToString());
         }
     }
@@ -128,6 +141,7 @@ public class GameManager : MonoBehaviour
         if (money >= hpUpgradeCost) {
             Stats.characterHpLevel += 1;
             money -= hpUpgradeCost;
+            UpdateHpLevelUI(); // UI 업데이트 메서드 호출
             text.SetText(money.ToString());
         }
     }
@@ -137,6 +151,7 @@ public class GameManager : MonoBehaviour
         if (money >= fireRateUpgradeCost) {
             Stats.characterFireRateLevel += 1;
             money -= fireRateUpgradeCost;
+            UpdateFireRateLevelUI(); // UI 업데이트 메서드 호출
             text.SetText(money.ToString());
         }
     }    
@@ -146,6 +161,7 @@ public class GameManager : MonoBehaviour
         if (money >= criticalRateUpgradeCost) {
             Stats.characterCriticalRateLevel += 1;
             money -= criticalRateUpgradeCost;
+            UpdateCriticalRateLevelUI(); // UI 업데이트 메서드 호출
             text.SetText(money.ToString());
         }
     }
@@ -153,8 +169,9 @@ public class GameManager : MonoBehaviour
         int criticalDamageUpgradeCost = 100;
 
         if (money >= criticalDamageUpgradeCost) {
-            Stats.characterDamageLevel += 1;
+            Stats.characterCriticalDamageLevel += 1;
             money -= criticalDamageUpgradeCost;
+            UpdateCriticalDamageLevelUI(); // UI 업데이트 메서드 호출
             text.SetText(money.ToString());
         }
     }        
@@ -164,13 +181,11 @@ public class GameManager : MonoBehaviour
         if (money >= defenceUpgradeCost) {
             Stats.characterDefenceLevel += 1;
             money -= defenceUpgradeCost;
+            UpdateDefenceLevelUI(); // UI 업데이트 메서드 호출
             text.SetText(money.ToString());
         }
     }    
-    
-    public void ClearBoard() {
-        
-    }
+
     public void CharacterDied()
     {
         // 캐릭터 사망 시 호출되는 함수
@@ -178,4 +193,25 @@ public class GameManager : MonoBehaviour
         Debug.Log("게임 오버");
         // 예를 들어 게임 오버 화면을 표시하거나 게임을 재시작하는 로직을 추가할 수 있습니다.
     }
+
+        // UI 업데이트 메서드
+    private void UpdateDamageLevelUI(){
+        DamageLevelText.SetText("Lv." + Stats.characterDamageLevel.ToString());
+    }
+    private void UpdateHpLevelUI(){
+        HpLevelText.SetText("Lv." + Stats.characterHpLevel.ToString());
+    }
+    private void UpdateFireRateLevelUI(){
+        FireRateLevelText.SetText("Lv." + Stats.characterFireRateLevel.ToString());
+    }
+    private void UpdateCriticalRateLevelUI(){
+        CriticalRateLevelText.SetText("Lv." + Stats.characterCriticalRateLevel.ToString());
+    }
+    private void UpdateCriticalDamageLevelUI(){
+        CriticalDamageLevelText.SetText("Lv." + Stats.characterCriticalDamageLevel.ToString());
+    }
+    private void UpdateDefenceLevelUI(){
+        DefenceLevelText.SetText("Lv." + Stats.characterDefenceLevel.ToString());
+    }
+
 }

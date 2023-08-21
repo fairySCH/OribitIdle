@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI CriticalDamageLevelText;
     [SerializeField]
     private TextMeshProUGUI DefenceLevelText;
+    [SerializeField]
+    private TextMeshProUGUI SpinSpeedLevelText;
+    [SerializeField]
+    private TextMeshProUGUI DamageUpgradeCostText;
+
     private int money = 99999; // 돈 선언 및 0 초기화
     public static int stageCounter = 0; // 스테이지 수 변수
     private bool bossSpawned = false; // 보스 소환 상태 저장
@@ -126,11 +131,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void UpgradeBulletDamage() { // 캐릭터 총알 데미지 업그레이드
-        int upgradecost = 50;
+        int damageUpgradeCost = 100;
 
-        if (money >= upgradecost) {
+        if (money >= damageUpgradeCost) {
+            money -= damageUpgradeCost;
             Stats.characterDamageLevel += 1;
-            money -= upgradecost;
             UpdateDamageLevelUI(); // UI 업데이트 메서드 호출
             text.SetText(money.ToString());
         }
@@ -185,6 +190,16 @@ public class GameManager : MonoBehaviour
             text.SetText(money.ToString());
         }
     }    
+    public void UpgradeSpinSpeed() { // 캐릭터 방어력 업그레이드
+        int spinSpeedUpgradeCost = 50;
+
+        if (money >= spinSpeedUpgradeCost) {
+            Stats.characterSpinSpeedLevel += 1;
+            money -= spinSpeedUpgradeCost;
+            UpdateSpinSpeedLevelUI(); // UI 업데이트 메서드 호출
+            text.SetText(money.ToString());
+        }
+    }    
 
     public void CharacterDied()
     {
@@ -212,6 +227,9 @@ public class GameManager : MonoBehaviour
     }
     private void UpdateDefenceLevelUI(){
         DefenceLevelText.SetText("Lv." + Stats.characterDefenceLevel.ToString());
+    }
+    private void UpdateSpinSpeedLevelUI(){
+        SpinSpeedLevelText.SetText("Lv." + Stats.characterSpinSpeedLevel.ToString());
     }
 
 }

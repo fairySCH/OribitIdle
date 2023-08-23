@@ -812,12 +812,12 @@ MonoBehaviour:
   DefenceLevelText: {fileID: 839688141}
   SpinSpeedLevelText: {fileID: 264888055}
   DamageUpgradeCostText: {fileID: 956100751}
-  HpUpgradeCostText: {fileID: 0}
-  FireRateUpgradeCostText: {fileID: 0}
-  CriticalRateUpgradeCostText: {fileID: 0}
-  DefenceUpgradeCostText: {fileID: 0}
-  SpinSpeedUpgradeCostText: {fileID: 0}
-  CriticalDamageUpgradeCostText: {fileID: 0}
+  HpUpgradeCostText: {fileID: 1007340945}
+  FireRateUpgradeCostText: {fileID: 2099344095}
+  CriticalRateUpgradeCostText: {fileID: 1810688459}
+  DefenceUpgradeCostText: {fileID: 2027499826}
+  SpinSpeedUpgradeCostText: {fileID: 597037531}
+  CriticalDamageUpgradeCostText: {fileID: 937445525}
   enemyPrefab: {fileID: 6316464532081113472, guid: 240f4123cb361a04db90a19015b07a37, type: 3}
   bossPrefab: {fileID: 3171393108218872400, guid: cc0414d70e3cd9d40afbe13e95cacd4c, type: 3}
   spawnPoint: {fileID: 8411891349323260772, guid: f2c23db447dba354b9ad7874b60add45, type: 3}
@@ -3538,7 +3538,7 @@ GameObject:
   - component: {fileID: 597037532}
   - component: {fileID: 597037531}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: SpinSpeedUpgradeCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4922,7 +4922,7 @@ GameObject:
   - component: {fileID: 937445526}
   - component: {fileID: 937445525}
   m_Layer: 5
-  m_Name: CriticaldamageUpgradeCost
+  m_Name: CriticalDamageUpgradeCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5057,7 +5057,7 @@ GameObject:
   - component: {fileID: 956100752}
   - component: {fileID: 956100751}
   m_Layer: 5
-  m_Name: DamageUpgradeCost
+  m_Name: DamageUpgradeCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5437,7 +5437,7 @@ GameObject:
   - component: {fileID: 1007340946}
   - component: {fileID: 1007340945}
   m_Layer: 5
-  m_Name: HpUpgradeCost
+  m_Name: HpUpgradeCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8149,7 +8149,7 @@ GameObject:
   - component: {fileID: 1810688460}
   - component: {fileID: 1810688459}
   m_Layer: 5
-  m_Name: CriticalrateUpgradeCost
+  m_Name: CriticalRateUpgradeCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8579,7 +8579,7 @@ GameObject:
   - component: {fileID: 2027499827}
   - component: {fileID: 2027499826}
   m_Layer: 5
-  m_Name: DefenceUpgradeCost
+  m_Name: DefenceUpgradeCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9195,7 +9195,7 @@ GameObject:
   - component: {fileID: 2099344096}
   - component: {fileID: 2099344095}
   m_Layer: 5
-  m_Name: FirerateUpgradeCost
+  m_Name: FireRateUpgradeCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

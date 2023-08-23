@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int bossHpMultiplier = 25; // 보스 체력 배수
 
+    Stats stat = new Stats();
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        moneyReward = moneyReward*(GameManager.stageCounter+1);
         // Check if the enemy's current HP has dropped to or below 0
         if (currentHp <= 0)
         {
@@ -55,7 +57,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Weapon")
         {
-            currentHp -= Stats.damage;
+            currentHp -= stat.Damage();
 
             // 적 사망처리
             if (currentHp <= 0)

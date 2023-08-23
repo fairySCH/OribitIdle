@@ -44,6 +44,7 @@ public class BossCharacter : MonoBehaviour
         Vector3 fireDirection = (predictedPlayerPosition - shootTransform.position).normalized;
 
         GameObject bullet = Instantiate(bulletPrefab, shootTransform.position, Quaternion.identity);
+        bulletDamage = bulletDamage+10*GameManager.stageCounter; // 스테이지에 비례하여 보스의 데미지 상승
         bullet.GetComponent<Bullet>().SetDamage(bulletDamage); 
         bullet.GetComponent<Rigidbody2D>().velocity = fireDirection * bulletSpeed;
     }

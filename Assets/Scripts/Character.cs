@@ -33,7 +33,7 @@ public class Character : MonoBehaviour
     private float currentHp; // 현재 체력
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         angle = Mathf.PI * 3 / 2; // 시작 위치 초기화
         currentHp = stat.Hp(); // 체력 초기화
@@ -52,13 +52,17 @@ public class Character : MonoBehaviour
         Shoot();
     }
 
-    void Shoot()
+    public void Shoot()
     {
         if (Time.time - lastShotTime > stat.FireRate())
         {
             Instantiate(weapon, shootTransform.position, Quaternion.identity);
             lastShotTime = Time.time;
         }
+    }
+    public void Shoot1()
+    {
+            Instantiate(weapon, shootTransform.position, Quaternion.identity);
     }
 
     public void TakeDamage(float damage) // 캐릭터 데미지 받는 함수.

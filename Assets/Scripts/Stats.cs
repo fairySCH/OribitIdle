@@ -18,7 +18,24 @@ public class Stats : MonoBehaviour
     public static float criticalRate = 0;
     public static float defence = 0;
     public static float spinSpeed = 0;
-
+    
+    void Start() {
+    // Initialize level&stats
+        characterHpLevel = 0;
+        characterDamageLevel = 0;
+        characterFireRateLevel = 0;
+        characterCriticalRateLevel = 0;
+        characterCriticalDamageLevel = 0;
+        characterDefenceLevel = 0;
+        characterSpinSpeedLevel = 0;
+        criticalDamage = 0;
+        damage = 0;
+        hp = 0;
+        fireRate = 0;
+        criticalRate = 0;
+        defence = 0;
+        spinSpeed = 0;
+    }
     public float Hp() {
         float hp = 100 + 10*characterHpLevel;
         return hp;

@@ -33,33 +33,42 @@ public class Stats : MonoBehaviour
     public static int spinSpeedUpgradeCost;
 
     //==================================================================
+
+    void Awake() {
+        Hp();
+        Damage();
+        FireRate();
+        CriticalRate();
+        Defence();
+        SpinSpeed();
+        CriticalDamage();
+    }
     public float Hp() {
-        float hp = 100f + 10f*characterHpLevel;
+        hp = 100f + 10f*characterHpLevel;
         return hp;
     }
     public float Damage() {
-        float damage = 10f + 10f*characterDamageLevel;
+        damage = 10f + 10f*characterDamageLevel;
         return damage;
     }
     public float FireRate() {
-        float fireRate = 1f - 0.05f*characterFireRateLevel;
+        fireRate = 1f - 0.05f*characterFireRateLevel;
         return fireRate;
     }
     public float CriticalRate() {
-        float criticalRate = 0.01f*characterCriticalRateLevel;
+        criticalRate = 0.01f*characterCriticalRateLevel;
         return criticalRate;
     }
     public float Defence() {
-        float defence = 10f + 15f*characterDefenceLevel;
+        defence = 10f + 15f*characterDefenceLevel;
         return defence;
     }
     public float SpinSpeed() {
-        float spinSpeed = 1f + 0.5f*characterSpinSpeedLevel;
+        spinSpeed = 1f + 0.5f*characterSpinSpeedLevel;
         return spinSpeed;
     }
-        public float CriticalDamage() {
-        float damage = Damage();
-        float criticalDamage = (2f + 0.5f*characterCriticalDamageLevel)*damage;
+    public float CriticalDamage() {
+        criticalDamage = (2f + 0.5f*characterCriticalDamageLevel)*damage;
         return criticalDamage;
     }
 

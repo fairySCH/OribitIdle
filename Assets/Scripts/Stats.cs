@@ -34,15 +34,6 @@ public class Stats : MonoBehaviour
 
     //==================================================================
 
-    void Awake() {
-        Hp();
-        Damage();
-        FireRate();
-        CriticalRate();
-        Defence();
-        SpinSpeed();
-        CriticalDamage();
-    }
     public float Hp() {
         hp = 100f + 10f*characterHpLevel;
         return hp;

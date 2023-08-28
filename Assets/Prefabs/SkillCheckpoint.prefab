@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7871159113394484715}
   - component: {fileID: 5330099013384948513}
   m_Layer: 0
-  m_Name: SkillCheckpoint1
+  m_Name: SkillCheckpoint
   m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6676841616230808344
 SpriteRenderer:
@@ -171,3 +171,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49e628400a4b014b8d013f3d4b4ca80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillCount1: 0
+  skillCount2: 0
+  skillCount3: 0
+  skillCount4: 0
+  skillCount5: 0
+  skillCount6: 0

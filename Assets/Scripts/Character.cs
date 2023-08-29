@@ -48,19 +48,18 @@ public class Character : MonoBehaviour
     public void Start()
     {
         angle = Mathf.PI * 3 / 2; // 시작 위치 초기화
-        currentHp = stat.Hp(); // 체력 초기화
-        Stats.fireRate = stat.FireRate();
+        currentHp = Stats.hp; // 체력 초기화
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        angle += stat.SpinSpeed() * Time.deltaTime;
+        angle += Stats.spinSpeed * Time.deltaTime;
         transform.position = center.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
 
-        velocity = new Vector2(-radius * stat.SpinSpeed() * Mathf.Sin(angle), radius * stat.SpinSpeed() * Mathf.Cos(angle));
-        angularSpeed = stat.SpinSpeed();
+        velocity = new Vector2(-radius * Stats.spinSpeed * Mathf.Sin(angle), radius * Stats.spinSpeed * Mathf.Cos(angle));
+        angularSpeed = Stats.spinSpeed;
         Shoot(Stats.fireRate);
     }
 

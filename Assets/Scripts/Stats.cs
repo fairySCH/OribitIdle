@@ -14,82 +14,69 @@ public class Stats : MonoBehaviour
 
     //===================================================================
 
-    public static float criticalDamage;
-    public static float damage;
-    public static float hp;
-    public static float fireRate;
-    public static float criticalRate;
-    public static float defence;
-    public static float spinSpeed;
+    public static float hp = 100f;
+    public static float damage = 10f;
+    public static float fireRate = 1f;
+    public static float criticalRate = 0.01f;
+    public static float criticalDamage = 2f;
+    public static float defence = 10f;
+    public static float spinSpeed = 1f;
 
     //===================================================================
 
-    public static int criticalDamageUpgradeCost;
-    public static int damageUpgradeCost;
-    public static int hpUpgradeCost;
-    public static int fireRateUpgradeCost;
-    public static int criticalRateUpgradeCost;
-    public static int defenceUpgradeCost;
-    public static int spinSpeedUpgradeCost;
+    public static int hpUpgradeCost = 50;
+    public static int damageUpgradeCost = 50;
+    public static int fireRateUpgradeCost = 50;
+    public static int criticalRateUpgradeCost = 50;
+    public static int criticalDamageUpgradeCost = 50;
+    public static int defenceUpgradeCost = 50;
+    public static int spinSpeedUpgradeCost = 50;
 
     //==================================================================
 
-    public float Hp() {
+    public void UpdateHp() {
         hp = 100f + 10f*characterHpLevel;
-        return hp;
     }
-    public float Damage() {
+    public void UpdateDamage() {
         damage = 10f + 10f*characterDamageLevel;
-        return damage;
     }
-    public float FireRate() {
+    public void UpdateFireRate() {
         fireRate = 1f - 0.05f*characterFireRateLevel;
-        return fireRate;
     }
-    public float CriticalRate() {
+    public void UpdateCriticalRate() {
         criticalRate = 0.01f*characterCriticalRateLevel;
-        return criticalRate;
     }
-    public float Defence() {
-        defence = 10f + 15f*characterDefenceLevel;
-        return defence;
-    }
-    public float SpinSpeed() {
-        spinSpeed = 1f + 0.5f*characterSpinSpeedLevel;
-        return spinSpeed;
-    }
-    public float CriticalDamage() {
+    public void UpdateCriticalDamage() {
         criticalDamage = (2f + 0.5f*characterCriticalDamageLevel)*damage;
-        return criticalDamage;
     }
+    public void UpdateDefence() {
+        defence = 10f + 15f*characterDefenceLevel;
+    }
+    public void UpdateSpinSpeed() {
+        spinSpeed = 1f + 0.5f*characterSpinSpeedLevel;
+    }
+    
 
     //=================================================================
-    public int HpUpgradeCost() {
-        int hpUpgradeCost = 50 + 10*characterHpLevel;
-        return hpUpgradeCost;
+    public void UpdateHpUpgradeCost() {
+        hpUpgradeCost = 50 + 10*characterHpLevel;
     }
-    public int DamageUpgradeCost() {
-        int damageUpgradeCost = 50 + 10*characterDamageLevel;
-        return damageUpgradeCost;
+    public void UpdateDamageUpgradeCost() {
+        damageUpgradeCost = 50 + 10*characterDamageLevel;
     }
-    public int FireRateUpgradeCost() {
-        int fireRateUpgradeCost = 50 + 10*characterFireRateLevel;
-        return fireRateUpgradeCost;
+    public void UpdateFireRateUpgradeCost() {
+        fireRateUpgradeCost = 50 + 10*characterFireRateLevel;
     }
-    public int CriticalRateUpgradeCost() {
-        int criticalRateUpgradeCost = 50 + 10*characterCriticalRateLevel;
-        return criticalRateUpgradeCost;
+    public void UpdateCriticalRateUpgradeCost() {
+        criticalRateUpgradeCost = 50 + 10*characterCriticalRateLevel;
     }
-    public int DefenceUpgradeCost() {
-        int defenceUpgradeCost = 50 + 10*characterDefenceLevel;
-        return defenceUpgradeCost;
+    public void UpdateCriticalDamageUpgradeCost() {
+        criticalDamageUpgradeCost = 50 + 10*characterCriticalDamageLevel;
     }
-    public int SpinSpeedUpgradeCost() {
-        int spinSpeedUpgradeCost = 50 + 10*characterSpinSpeedLevel;
-        return spinSpeedUpgradeCost;
+    public void UpdateDefenceUpgradeCost() {
+        defenceUpgradeCost = 50 + 10*characterDefenceLevel;
     }
-    public int CriticalDamageUpgradeCost() {
-        int criticalDamageUpgradeCost = 50 + 10*characterCriticalDamageLevel;
-        return criticalDamageUpgradeCost;
+    public void UpdateSpinSpeedUpgradeCost() {
+        spinSpeedUpgradeCost = 50 + 10*characterSpinSpeedLevel;
     }
 }

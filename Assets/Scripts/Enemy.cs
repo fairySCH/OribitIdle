@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Weapon")
         {
-            currentHp -= stat.Damage();
+            currentHp -= Stats.damage;
 
             // 적 사망처리
             if (currentHp <= 0)

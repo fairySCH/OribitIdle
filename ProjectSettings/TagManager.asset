@@ -10,6 +10,9 @@ TagManager:
   - Blue
   - Checkpoint
   - Checkpoint1
+  - Checkpoint2
+  - Checkpoint3
+  - Checkpoint4
   layers:
   - Default
   - TransparentFX

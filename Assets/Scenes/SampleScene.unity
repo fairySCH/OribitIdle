@@ -6083,7 +6083,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 171950350}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: UpgradeBulletDamage
+        m_MethodName: UpgradeCharacterDamage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

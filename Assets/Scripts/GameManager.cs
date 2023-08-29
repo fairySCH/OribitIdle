@@ -220,19 +220,16 @@ public class GameManager : MonoBehaviour
             UpdateSpinSpeedUI();
         }
     }    
-    private bool CanAfford(int cost)
-    {
+    private bool CanAfford(int cost) {
         return money >= cost;
     }
-    private void DeductMoney(int amount)
-    {
+    private void DeductMoney(int amount) {
         money -= amount;
         text.SetText(money.ToString());
     }
 
         // UI 업데이트 메서드
-    private void UpdateDamageUI()
-    {
+    private void UpdateDamageUI() {
         DamageUpgradeCostText.SetText(Stats.damageUpgradeCost.ToString());
         DamageLevelText.SetText("Lv." + Stats.characterDamageLevel.ToString());
     }

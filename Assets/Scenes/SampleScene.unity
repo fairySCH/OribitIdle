@@ -578,7 +578,6 @@ MonoBehaviour:
   radius: 1.95
   weapon: {fileID: 496536555526954850, guid: 7bea4dfd95e84dc428f18fbbb5397f1f, type: 3}
   shootTransform: {fileID: 501027042}
-  checkpoint1: {fileID: 588666494}
   skillCount1: 0
   skillCount2: 0
   skillCount3: 0
@@ -3458,11 +3457,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532804178}
   m_CullTransparentMesh: 1
---- !u!4 &588666494 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8710600034862591189, guid: d23268b150451b14ab86623d4ce51899, type: 3}
-  m_PrefabInstance: {fileID: 946871778}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &594421319
 GameObject:
   m_ObjectHideFlags: 0
@@ -4983,8 +4977,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 0b2815ca7373272458b06302517b7149, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5018,7 +5012,7 @@ MonoBehaviour:
   current: 192
   mask: {fileID: 1024359503}
   fill: {fileID: 1958006822}
-  color: {r: 0.5394079, g: 0.2794144, b: 0.8584906, a: 1}
+  color: {r: 0.9811321, g: 0.0509078, b: 0.7163417, a: 1}
 --- !u!1 &937445523
 GameObject:
   m_ObjectHideFlags: 0
@@ -5794,7 +5788,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 0b2815ca7373272458b06302517b7149, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8803,15 +8797,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5394079, g: 0.2794144, b: 0.8584906, a: 1}
+  m_Color: {r: 0.9811321, g: 0.0509078, b: 0.7163417, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 0b2815ca7373272458b06302517b7149, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

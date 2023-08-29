@@ -6,9 +6,9 @@ using UnityEngine.UI;
 [ExecuteInEditMode()]
 public class ProgressBar : MonoBehaviour
 {
-    public int maximum;
-    public int minimum;
-    public int current;
+    public int maximum = 25;
+    public int minimum = 0;
+    public int current { get { return GameManager.GetEnemyCounter(); } }
     public Image mask;
     public Image fill;
     public Color color;

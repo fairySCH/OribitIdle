@@ -5084,9 +5084,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba12cc20c92c81408b5f0817b8254bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximum: 250
-  minimum: 158
-  current: 192
+  maximum: 25
+  minimum: 0
   mask: {fileID: 1024359503}
   fill: {fileID: 1958006822}
   color: {r: 0.9811321, g: 0.0509078, b: 0.7163417, a: 1}
@@ -5870,7 +5869,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.36956522
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -6271,7 +6270,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 171950350}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: UpgradeBulletDamage
+        m_MethodName: UpgradeCharacterDamage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int bossHpMultiplier = 25; // 보스 체력 배수
 
-    Stats stat = new Stats();
     // Start is called before the first frame update
     void Start()
     {

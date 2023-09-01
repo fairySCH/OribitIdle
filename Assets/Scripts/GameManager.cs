@@ -5,8 +5,9 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    Stats stat = new Stats();
+    Stats stat;
     public static GameManager instance;
+
     [SerializeField]
     private TextMeshProUGUI text; // 돈 보여주기?
 
@@ -57,10 +58,13 @@ public class GameManager : MonoBehaviour
     
     private int enemiesDefeated = 0; // 
     private int enemiesToRespawn = 1; // 한 번에 하나의 적만 소환하도록 변경
-    private int enemyCounter = 0; // 이번 스테이지에서 처치한 적의 수
+    public static int enemyCounter = 0; // 이번 스테이지에서 처치한 적의 수
     
     private void Awake()
     {
+        if (stat == null) {
+            stat = gameObject.AddComponent<Stats>();
+        }
         if (instance == null)
         {
             instance = this;
@@ -258,4 +262,7 @@ public class GameManager : MonoBehaviour
         SpinSpeedLevelText.SetText("Lv." + Stats.characterSpinSpeedLevel.ToString());
     }
 
+    public static int GetEnemyCounter() {
+        return enemyCounter;
+    }
 }

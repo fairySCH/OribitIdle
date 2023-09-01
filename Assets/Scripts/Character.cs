@@ -5,7 +5,6 @@ using TMPro;
 
 public class Character : MonoBehaviour
 {
-    Stats stat = new Stats();
     public Transform center;
     public float radius = 2.0f;
     private float angle; // Removed the property for starting angle

@@ -5,8 +5,9 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    Stats stat = new Stats();
+    Stats stat;
     public static GameManager instance;
+
     [SerializeField]
     private TextMeshProUGUI text; // 돈 보여주기?
 
@@ -61,6 +62,9 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
+        if (stat == null) {
+            stat = gameObject.AddComponent<Stats>();
+        }
         if (instance == null)
         {
             instance = this;

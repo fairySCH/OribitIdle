@@ -2,46 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+
 
 public class GameManager : MonoBehaviour
 {
     Stats stat;
     public static GameManager instance;
-
-    [SerializeField]
-    private TextMeshProUGUI text; // 돈 보여주기?
+    // public Text로 모두 바꿀 예정
+    public TextMeshProUGUI moneyText; // 돈 보여주기?
 
     //=============================================================
-    [SerializeField]
-    private TextMeshProUGUI DamageLevelText;
-    [SerializeField]
-    private TextMeshProUGUI HpLevelText;
-    [SerializeField]
-    private TextMeshProUGUI FireRateLevelText;
-    [SerializeField]
-    private TextMeshProUGUI CriticalRateLevelText;
-    [SerializeField]
-    private TextMeshProUGUI CriticalDamageLevelText;
-    [SerializeField]
-    private TextMeshProUGUI DefenceLevelText;
-    [SerializeField]
-    private TextMeshProUGUI SpinSpeedLevelText;
+    public TextMeshProUGUI DamageLevelText;
+    public TextMeshProUGUI HpLevelText;
+    public TextMeshProUGUI FireRateLevelText;
+    public TextMeshProUGUI CriticalRateLevelText;
+    public TextMeshProUGUI CriticalDamageLevelText;
+    public TextMeshProUGUI DefenceLevelText;
+    public TextMeshProUGUI SpinSpeedLevelText;
 
     //============================================================
-    [SerializeField]
-    private TextMeshProUGUI DamageUpgradeCostText;
-    [SerializeField]
-    private TextMeshProUGUI HpUpgradeCostText;
-    [SerializeField]
-    private TextMeshProUGUI FireRateUpgradeCostText;
-    [SerializeField]
-    private TextMeshProUGUI CriticalRateUpgradeCostText;
-    [SerializeField]
-    private TextMeshProUGUI DefenceUpgradeCostText;
-    [SerializeField]
-    private TextMeshProUGUI SpinSpeedUpgradeCostText;
-    [SerializeField]
-    private TextMeshProUGUI CriticalDamageUpgradeCostText;
+    public TextMeshProUGUI DamageUpgradeCostText;
+    public TextMeshProUGUI HpUpgradeCostText;
+    public TextMeshProUGUI FireRateUpgradeCostText;
+    public TextMeshProUGUI CriticalRateUpgradeCostText;
+    public TextMeshProUGUI DefenceUpgradeCostText;
+    public TextMeshProUGUI SpinSpeedUpgradeCostText;
+    public TextMeshProUGUI CriticalDamageUpgradeCostText;
 
     private int money = 99999; // 돈 선언 및 0 초기화
     public static int stageCounter = 0; // 스테이지 수 변수
@@ -84,10 +71,12 @@ public class GameManager : MonoBehaviour
         if (isBossAlive) {
             currentBossTime += Time.deltaTime;
             if (currentBossTime >= bossTimeLimit) {
-                // 보스를 제한 시간 내에 처치하지 못했을 때
+                // 보스를 제한 시간 내에 처치하지 못했을 때 무한 스테이지로 변경
                 RestartStage();
             }
         }
+        //#. UI moeny update
+        moneyText.text = string.Format("{0:n0}", money);
     }
     void SpawnEnemies() {
         if (bossSpawned) // 보스가 소환되어있으면 보스를 소환 / 아니면 넘어감.
@@ -113,7 +102,7 @@ public class GameManager : MonoBehaviour
         if (!isBossAlive) {
             enemiesDefeated++;
             enemyCounter++;
-
+            // 무한 모드가 아닐 때
             if (enemyCounter == 25) {
                 SpawnBoss();
                 enemyCounter = 0; // 보스가 소환되면 적 처치 수를 초기화
@@ -152,7 +141,7 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseMoney(int reward) {
         money += reward;
-        text.SetText(money.ToString());
+        // text.SetText(money.ToString());
     }
     // damage upgrade
     public void UpgradeCharacterDamage() {
@@ -229,7 +218,7 @@ public class GameManager : MonoBehaviour
     }
     private void DeductMoney(int amount) {
         money -= amount;
-        text.SetText(money.ToString());
+        // text.SetText(money.ToString());
     }
 
         // UI 업데이트 메서드
@@ -265,4 +254,11 @@ public class GameManager : MonoBehaviour
     public static int GetEnemyCounter() {
         return enemyCounter;
     }
+    //무한 스테이지 모드 들어가는 함수() {
+        //
+    //}
+    //보스 스테이지 엔터 함수() {
+        // 모든 적 없애기 (이때 카운터는 안올라감)
+        // 
+    //}
 }

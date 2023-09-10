@@ -51,20 +51,24 @@ public class GameManager : MonoBehaviour
     {
         if (stat == null) {
             stat = gameObject.AddComponent<Stats>();
+            Debug.Log("stat을 불러왔습니다.");
         }
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject); // This ensures the object persists across scenes
+            Debug.Log("instance == null");
         }
         else if (instance != this)
         {
             Destroy(gameObject); // Ensures that any additional instances are destroyed
+            Debug.Log("instance != this");
         }
     }
     void Start()
     {
         SpawnEnemies(); // 게임 시작 시 적 소환으로 게임을 시작한다.
+        Debug.Log("일반 몹을 소환합니다.");
     }
     void Update()
     {
@@ -73,6 +77,7 @@ public class GameManager : MonoBehaviour
             if (currentBossTime >= bossTimeLimit) {
                 // 보스를 제한 시간 내에 처치하지 못했을 때 무한 스테이지로 변경
                 RestartStage();
+                Debug.Log("주어진 시간은" + bossTimeLimit + "초였습니다.");
             }
         }
         //#. UI moeny update
@@ -84,8 +89,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (!isBossAlive)
-        {
+        if (!isBossAlive) {
             for (int i = 0; i < enemiesToRespawn; i++)
             {
                 Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
@@ -94,6 +98,7 @@ public class GameManager : MonoBehaviour
     }
     void SpawnBoss() 
     {
+        Debug.Log("보스가 소환됩니다.");
         isBossAlive = true;
         bossSpawned = true;
         Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
@@ -104,9 +109,11 @@ public class GameManager : MonoBehaviour
             enemyCounter++;
             // 무한 모드가 아닐 때
             if (enemyCounter == 25) {
+                Debug.Log("몹을 " + enemyCounter + "마리 처치하여 보스몹이 소환됩니다.");
                 SpawnBoss();
                 enemyCounter = 0; // 보스가 소환되면 적 처치 수를 초기화
             } else if (enemiesDefeated >= enemiesToRespawn) {
+                Debug.Log("처치한 적 수 : " + enemyCounter);
                 enemiesDefeated = 0;
                 SpawnEnemies();
             }
@@ -125,6 +132,7 @@ public class GameManager : MonoBehaviour
     public void RestartStage()
     {
         // 보스를 처치하지 못했을 때 스테이지 재시작
+        Debug.Log("제한시간 내에 보스를 처치하지 못하여 무한모드로 전환하였습니다.");
         isBossAlive = false;
         bossSpawned = false;
         currentBossTime = 0f;
@@ -141,6 +149,7 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseMoney(int reward) {
         money += reward;
+        Debug.Log("돈을 " + reward + "만큼 얻었습니다.");
         // text.SetText(money.ToString());
     }
     // damage upgrade

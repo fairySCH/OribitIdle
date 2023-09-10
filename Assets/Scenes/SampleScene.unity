@@ -5123,7 +5123,7 @@ MonoBehaviour:
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -5153,7 +5153,7 @@ MonoBehaviour:
   minimum: 0
   mask: {fileID: 1024359503}
   fill: {fileID: 1958006822}
-  color: {r: 0.9811321, g: 0.0509078, b: 0.7163417, a: 1}
+  color: {r: 0.28298512, g: 0.764151, b: 0.24870951, a: 1}
 --- !u!1 &937445523
 GameObject:
   m_ObjectHideFlags: 0
@@ -5934,7 +5934,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.56
+  m_FillAmount: 0.12
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -9358,7 +9358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9811321, g: 0.0509078, b: 0.7163417, a: 1}
+  m_Color: {r: 0.28298512, g: 0.764151, b: 0.24870951, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

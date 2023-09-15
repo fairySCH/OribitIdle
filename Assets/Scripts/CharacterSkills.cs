@@ -5,7 +5,6 @@ using UnityEngine;
 public class CharacterSkills : MonoBehaviour
 {
     Character character;
-    Stats stat;
     [SerializeField]
     public int skillCount1;
     public int skillCount2;

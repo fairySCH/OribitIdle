@@ -2,46 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+
 
 public class GameManager : MonoBehaviour
 {
-    Stats stat;
+    public Character character;
     public static GameManager instance;
-
-    [SerializeField]
-    private TextMeshProUGUI text; // 돈 보여주기?
+    // public Text로 모두 바꿀 예정
+    public TextMeshProUGUI moneyText; // 돈 보여주기?
 
     //=============================================================
-    [SerializeField]
-    private TextMeshProUGUI DamageLevelText;
-    [SerializeField]
-    private TextMeshProUGUI HpLevelText;
-    [SerializeField]
-    private TextMeshProUGUI FireRateLevelText;
-    [SerializeField]
-    private TextMeshProUGUI CriticalRateLevelText;
-    [SerializeField]
-    private TextMeshProUGUI CriticalDamageLevelText;
-    [SerializeField]
-    private TextMeshProUGUI DefenceLevelText;
-    [SerializeField]
-    private TextMeshProUGUI SpinSpeedLevelText;
+    public TextMeshProUGUI DamageLevelText;
+    public TextMeshProUGUI HpLevelText;
+    public TextMeshProUGUI FireRateLevelText;
+    public TextMeshProUGUI CriticalRateLevelText;
+    public TextMeshProUGUI CriticalDamageLevelText;
+    public TextMeshProUGUI DefenceLevelText;
+    public TextMeshProUGUI SpinSpeedLevelText;
 
     //============================================================
-    [SerializeField]
-    private TextMeshProUGUI DamageUpgradeCostText;
-    [SerializeField]
-    private TextMeshProUGUI HpUpgradeCostText;
-    [SerializeField]
-    private TextMeshProUGUI FireRateUpgradeCostText;
-    [SerializeField]
-    private TextMeshProUGUI CriticalRateUpgradeCostText;
-    [SerializeField]
-    private TextMeshProUGUI DefenceUpgradeCostText;
-    [SerializeField]
-    private TextMeshProUGUI SpinSpeedUpgradeCostText;
-    [SerializeField]
-    private TextMeshProUGUI CriticalDamageUpgradeCostText;
+    public TextMeshProUGUI DamageUpgradeCostText;
+    public TextMeshProUGUI HpUpgradeCostText;
+    public TextMeshProUGUI FireRateUpgradeCostText;
+    public TextMeshProUGUI CriticalRateUpgradeCostText;
+    public TextMeshProUGUI DefenceUpgradeCostText;
+    public TextMeshProUGUI SpinSpeedUpgradeCostText;
+    public TextMeshProUGUI CriticalDamageUpgradeCostText;
 
     private int money = 99999; // 돈 선언 및 0 초기화
     public static int stageCounter = 0; // 스테이지 수 변수
@@ -54,7 +41,7 @@ public class GameManager : MonoBehaviour
     public Enemy bossPrefab; // 보스 prefab
     public Transform spawnPoint; // 적 소환위치 transform
     public Weapon weapon; // 무기 weapon 선언
-    public Character character; // 캐릭터 객체
+    // public Character character; // 캐릭터 객체
     
     private int enemiesDefeated = 0; // 
     private int enemiesToRespawn = 1; // 한 번에 하나의 적만 소환하도록 변경
@@ -62,32 +49,39 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
-        if (stat == null) {
-            stat = gameObject.AddComponent<Stats>();
+        if (character == null) {
+            character = gameObject.AddComponent<Character>();
+            Debug.Log("Character을 불러왔습니다.");
         }
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject); // This ensures the object persists across scenes
+            Debug.Log("instance == null");
         }
         else if (instance != this)
         {
             Destroy(gameObject); // Ensures that any additional instances are destroyed
+            Debug.Log("instance != this");
         }
     }
     void Start()
     {
         SpawnEnemies(); // 게임 시작 시 적 소환으로 게임을 시작한다.
+        Debug.Log("일반 몹을 소환합니다.");
     }
     void Update()
     {
         if (isBossAlive) {
             currentBossTime += Time.deltaTime;
             if (currentBossTime >= bossTimeLimit) {
-                // 보스를 제한 시간 내에 처치하지 못했을 때
+                // 보스를 제한 시간 내에 처치하지 못했을 때 무한 스테이지로 변경
                 RestartStage();
+                Debug.Log("주어진 시간은" + bossTimeLimit + "초였습니다.");
             }
         }
+        //#. UI moeny update
+        moneyText.text = string.Format("{0:n0}", money);
     }
     void SpawnEnemies() {
         if (bossSpawned) // 보스가 소환되어있으면 보스를 소환 / 아니면 넘어감.
@@ -95,8 +89,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (!isBossAlive)
-        {
+        if (!isBossAlive) {
             for (int i = 0; i < enemiesToRespawn; i++)
             {
                 Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
@@ -105,6 +98,7 @@ public class GameManager : MonoBehaviour
     }
     void SpawnBoss() 
     {
+        Debug.Log("보스가 소환됩니다.");
         isBossAlive = true;
         bossSpawned = true;
         Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
@@ -113,11 +107,13 @@ public class GameManager : MonoBehaviour
         if (!isBossAlive) {
             enemiesDefeated++;
             enemyCounter++;
-
+            // 무한 모드가 아닐 때
             if (enemyCounter == 25) {
+                Debug.Log("몹을 " + enemyCounter + "마리 처치하여 보스몹이 소환됩니다.");
                 SpawnBoss();
                 enemyCounter = 0; // 보스가 소환되면 적 처치 수를 초기화
             } else if (enemiesDefeated >= enemiesToRespawn) {
+                Debug.Log("처치한 적 수 : " + enemyCounter);
                 enemiesDefeated = 0;
                 SpawnEnemies();
             }
@@ -136,6 +132,7 @@ public class GameManager : MonoBehaviour
     public void RestartStage()
     {
         // 보스를 처치하지 못했을 때 스테이지 재시작
+        Debug.Log("제한시간 내에 보스를 처치하지 못하여 무한모드로 전환하였습니다.");
         isBossAlive = false;
         bossSpawned = false;
         currentBossTime = 0f;
@@ -152,75 +149,78 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseMoney(int reward) {
         money += reward;
-        text.SetText(money.ToString());
+        Debug.Log("돈을 " + reward + "만큼 얻었습니다.");
+        // text.SetText(money.ToString());
     }
     // damage upgrade
     public void UpgradeCharacterDamage() {
-        if (CanAfford(Stats.damageUpgradeCost)) {
-            DeductMoney(Stats.damageUpgradeCost);
-            Stats.characterDamageLevel += 1;
-            stat.UpdateDamageUpgradeCost();
-            stat.UpdateDamage();
+        if (CanAfford(Character.damageUpgradeCost)) {
+            DeductMoney(Character.damageUpgradeCost);
+            Character.characterDamageLevel += 1;
+            character.UpdateDamageUpgradeCost();
+            character.UpdateDamage();
             UpdateDamageUI();
+            Debug.Log("업그레이드 성공, 현재 업글비용: " + Character.damageUpgradeCost);
         }
     }
     // hp upgrade
     public void UpgradeCharacterHp() { // 캐릭터 최대 체력 업그레이드
-        if (CanAfford(Stats.hpUpgradeCost)) {
-            DeductMoney(Stats.hpUpgradeCost);
-            Stats.characterHpLevel += 1;
-            stat.UpdateHpUpgradeCost();
-            stat.UpdateHp();
+        if (CanAfford(Character.hpUpgradeCost)) {
+            DeductMoney(Character.hpUpgradeCost);
+            Character.characterHpLevel += 1;
+            character.UpdateHpUpgradeCost();
+            character.UpdateHp();
             UpdateHpUI();
+            Debug.Log("업그레이드 성공, 현재 업글비용: " + Character.hpUpgradeCost);
         }
     }
     // fire rate upgrade
     public void UpgradeCharacterFireRate() { // 총알 발사속도 업그레이드
-        if (CanAfford(Stats.fireRateUpgradeCost)) {
-            DeductMoney(Stats.fireRateUpgradeCost);
-            Stats.characterFireRateLevel += 1;
-            stat.UpdateFireRateUpgradeCost();
-            stat.UpdateFireRate();
+        if (CanAfford(Character.fireRateUpgradeCost)) {
+            DeductMoney(Character.fireRateUpgradeCost);
+            Character.characterFireRateLevel += 1;
+            character.UpdateFireRateUpgradeCost();
+            character.UpdateFireRate();
             UpdateFireRateUI();
         }
     }    
     // critical rate upgrade
     public void UpgradeCharacterCriticalRate() { // 캐릭터 치명타율 업그레이드
-        if (CanAfford(Stats.criticalRateUpgradeCost)) {
-            DeductMoney(Stats.criticalRateUpgradeCost);
-            Stats.characterCriticalRateLevel += 1;
-            stat.UpdateCriticalRateUpgradeCost();
-            stat.UpdateCriticalRate();
+        if (CanAfford(Character.criticalRateUpgradeCost)) {
+            DeductMoney(Character.criticalRateUpgradeCost);
+            Character.characterCriticalRateLevel += 1;
+            character.UpdateCriticalRateUpgradeCost();
+            character.UpdateCriticalRate();
             UpdateCriticalRateUI();
         }
     }
     // critical damage upgrade
     public void UpgradeCharacterCriticalDamage() { // 캐릭터 치명타 데미지% 업그레이드
-        if (CanAfford(Stats.criticalDamageUpgradeCost)) {
-            DeductMoney(Stats.criticalDamageUpgradeCost);
-            Stats.characterCriticalDamageLevel += 1;
-            stat.UpdateCriticalDamageUpgradeCost();
-            stat.UpdateCriticalDamage();
+        if (CanAfford(Character.criticalDamageUpgradeCost)) {
+            DeductMoney(Character.criticalDamageUpgradeCost);
+            Character.characterCriticalDamageLevel += 1;
+            character.UpdateCriticalDamageUpgradeCost();
+            character.UpdateCriticalDamage();
             UpdateCriticalDamageUI();
         }
     }        
     // defence upgrade
     public void UpgradeCharacterDefence() { // 캐릭터 방어력 업그레이드
-        if (CanAfford(Stats.defenceUpgradeCost)) {
-            DeductMoney(Stats.defenceUpgradeCost);
-            Stats.characterDefenceLevel += 1;
-            stat.UpdateDefenceUpgradeCost();
-            stat.UpdateDefence();
+        if (CanAfford(Character.defenceUpgradeCost)) {
+            DeductMoney(Character.defenceUpgradeCost);
+            Character.characterDefenceLevel += 1;
+            character.UpdateDefenceUpgradeCost();
+            character.UpdateDefence();
             UpdateDefenceUI();
         }
     }    
     // spinspeed upgrade
     public void UpgradeSpinSpeed() { // 캐릭터 방어력 업그레이드
-        if (CanAfford(Stats.spinSpeedUpgradeCost)) {
-            DeductMoney(Stats.spinSpeedUpgradeCost);
-            Stats.characterSpinSpeedLevel += 1;
-            stat.UpdateSpinSpeedUpgradeCost();
-            stat.UpdateSpinSpeed();
+        if (CanAfford(Character.spinSpeedUpgradeCost)) {
+            DeductMoney(Character.spinSpeedUpgradeCost);
+            Character.characterSpinSpeedLevel += 1;
+            character.UpdateSpinSpeedUpgradeCost();
+            character.UpdateSpinSpeed();
             UpdateSpinSpeedUI();
         }
     }    
@@ -229,40 +229,47 @@ public class GameManager : MonoBehaviour
     }
     private void DeductMoney(int amount) {
         money -= amount;
-        text.SetText(money.ToString());
+        // text.SetText(money.ToString());
     }
 
         // UI 업데이트 메서드
     private void UpdateDamageUI() {
-        DamageUpgradeCostText.SetText(Stats.damageUpgradeCost.ToString());
-        DamageLevelText.SetText("Lv." + Stats.characterDamageLevel.ToString());
+        DamageUpgradeCostText.SetText(Character.damageUpgradeCost.ToString());
+        DamageLevelText.SetText("Lv." + Character.characterDamageLevel.ToString());
     }
     private void UpdateHpUI() {
-        HpUpgradeCostText.SetText(Stats.damageUpgradeCost.ToString());
-        HpLevelText.SetText("Lv." + Stats.characterHpLevel.ToString());
+        HpUpgradeCostText.SetText(Character.damageUpgradeCost.ToString());
+        HpLevelText.SetText("Lv." + Character.characterHpLevel.ToString());
     }
     private void UpdateFireRateUI() {
-        FireRateUpgradeCostText.SetText(Stats.damageUpgradeCost.ToString());
-        FireRateLevelText.SetText("Lv." + Stats.characterFireRateLevel.ToString());
+        FireRateUpgradeCostText.SetText(Character.damageUpgradeCost.ToString());
+        FireRateLevelText.SetText("Lv." + Character.characterFireRateLevel.ToString());
     }
     private void UpdateCriticalRateUI() {
-        CriticalRateUpgradeCostText.SetText(Stats.damageUpgradeCost.ToString());
-        CriticalRateLevelText.SetText("Lv." + Stats.characterCriticalRateLevel.ToString());
+        CriticalRateUpgradeCostText.SetText(Character.damageUpgradeCost.ToString());
+        CriticalRateLevelText.SetText("Lv." + Character.characterCriticalRateLevel.ToString());
     }
     private void UpdateCriticalDamageUI() {
-        CriticalDamageUpgradeCostText.SetText(Stats.damageUpgradeCost.ToString());
-        CriticalDamageLevelText.SetText("Lv." + Stats.characterCriticalDamageLevel.ToString());
+        CriticalDamageUpgradeCostText.SetText(Character.damageUpgradeCost.ToString());
+        CriticalDamageLevelText.SetText("Lv." + Character.characterCriticalDamageLevel.ToString());
     }
     private void UpdateDefenceUI() {
-        DefenceUpgradeCostText.SetText(Stats.damageUpgradeCost.ToString());
-        DefenceLevelText.SetText("Lv." + Stats.characterDefenceLevel.ToString());
+        DefenceUpgradeCostText.SetText(Character.damageUpgradeCost.ToString());
+        DefenceLevelText.SetText("Lv." + Character.characterDefenceLevel.ToString());
     }
     private void UpdateSpinSpeedUI() {
-        SpinSpeedUpgradeCostText.SetText(Stats.damageUpgradeCost.ToString());
-        SpinSpeedLevelText.SetText("Lv." + Stats.characterSpinSpeedLevel.ToString());
+        SpinSpeedUpgradeCostText.SetText(Character.damageUpgradeCost.ToString());
+        SpinSpeedLevelText.SetText("Lv." + Character.characterSpinSpeedLevel.ToString());
     }
 
     public static int GetEnemyCounter() {
         return enemyCounter;
     }
+    //무한 스테이지 모드 들어가는 함수() {
+        //
+    //}
+    //보스 스테이지 엔터 함수() {
+        // 모든 적 없애기 (이때 카운터는 안올라감)
+        // 
+    //}
 }

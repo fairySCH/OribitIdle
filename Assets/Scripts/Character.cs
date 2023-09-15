@@ -5,6 +5,85 @@ using TMPro;
 
 public class Character : MonoBehaviour
 {
+    //===================================================================
+
+        
+    public static int characterHpLevel;
+    public static int characterDamageLevel;
+    public static int characterFireRateLevel;
+    public static int characterCriticalRateLevel;
+    public static int characterCriticalDamageLevel;
+    public static int characterDefenceLevel;
+    public static int characterSpinSpeedLevel;
+
+    //===================================================================
+
+    public static float hp;
+    public static float damage;
+    public static float fireRate;
+    public static float criticalRate;
+    public static float criticalDamage;
+    public static float defence;
+    public static float spinSpeed;
+
+    //===================================================================
+
+    public static int hpUpgradeCost;
+    public static int damageUpgradeCost;
+    public static int fireRateUpgradeCost;
+    public static int criticalRateUpgradeCost;
+    public static int criticalDamageUpgradeCost;
+    public static int defenceUpgradeCost;
+    public static int spinSpeedUpgradeCost;
+
+
+    //==================================================================
+
+    public void UpdateHp() {
+        hp = 100f + 10f*characterHpLevel;
+    }
+    public void UpdateDamage() {
+        damage = 10f + 10f*characterDamageLevel;
+    }
+    public void UpdateFireRate() {
+        fireRate = 1f - 0.05f*characterFireRateLevel;
+    }
+    public void UpdateCriticalRate() {
+        criticalRate = 0.01f*characterCriticalRateLevel;
+    }
+    public void UpdateCriticalDamage() {
+        criticalDamage = (2f + 0.5f*characterCriticalDamageLevel)*damage;
+    }
+    public void UpdateDefence() {
+        defence = 10f + 15f*characterDefenceLevel;
+    }
+    public void UpdateSpinSpeed() {
+        spinSpeed = 1f + 0.5f*characterSpinSpeedLevel;
+    }
+    
+
+    //=================================================================
+    public void UpdateHpUpgradeCost() {
+        hpUpgradeCost = 50 + 10*characterHpLevel;
+    }
+    public void UpdateDamageUpgradeCost() {
+        damageUpgradeCost = 50 + 10*characterDamageLevel;
+    }
+    public void UpdateFireRateUpgradeCost() {
+        fireRateUpgradeCost = 50 + 10*characterFireRateLevel;
+    }
+    public void UpdateCriticalRateUpgradeCost() {
+        criticalRateUpgradeCost = 50 + 10*characterCriticalRateLevel;
+    }
+    public void UpdateCriticalDamageUpgradeCost() {
+        criticalDamageUpgradeCost = 50 + 10*characterCriticalDamageLevel;
+    }
+    public void UpdateDefenceUpgradeCost() {
+        defenceUpgradeCost = 50 + 10*characterDefenceLevel;
+    }
+    public void UpdateSpinSpeedUpgradeCost() {
+        spinSpeedUpgradeCost = 50 + 10*characterSpinSpeedLevel;
+    }
     public Transform center;
     public float radius = 2.0f;
     private float angle; // Removed the property for starting angle
@@ -46,20 +125,49 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+
         angle = Mathf.PI * 3 / 2; // 시작 위치 초기화
-        currentHp = Stats.hp; // 체력 초기화
+
+        characterHpLevel = 0;
+        characterDamageLevel = 0;
+        characterFireRateLevel = 0;
+        characterCriticalRateLevel = 0;
+        characterCriticalDamageLevel = 0;
+        characterDefenceLevel = 0;
+        characterSpinSpeedLevel = 0;
+
+        hp = 100f;
+        damage = 10f;
+        fireRate = 1f;
+        criticalRate = 0.01f;
+        criticalDamage = 2f;
+        defence = 10f;
+        spinSpeed = 1f;
+
+        hpUpgradeCost = 50;
+        damageUpgradeCost = 50;
+        fireRateUpgradeCost = 50;
+        criticalRateUpgradeCost = 50;
+        criticalDamageUpgradeCost = 50;
+        defenceUpgradeCost = 50;
+        spinSpeedUpgradeCost = 50;
+
+        currentHp = hp; // 체력 초기화
+        Debug.Log("현재 체력은" + currentHp + "이고, 레벨은" + characterHpLevel + "이고, 업그래이드 비용은" + hpUpgradeCost + "입니다.");
+        Debug.Log("현재 공격력은" + damage + "입니다. ");
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        angle += Stats.spinSpeed * Time.deltaTime;
+        angle += spinSpeed * Time.deltaTime;
         transform.position = center.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
 
-        velocity = new Vector2(-radius * Stats.spinSpeed * Mathf.Sin(angle), radius * Stats.spinSpeed * Mathf.Cos(angle));
-        angularSpeed = Stats.spinSpeed;
-        Shoot(Stats.fireRate);
+        velocity = new Vector2(-radius * spinSpeed * Mathf.Sin(angle), radius * spinSpeed * Mathf.Cos(angle));
+        angularSpeed = spinSpeed;
+        Shoot(fireRate);
     }
 
     public void Shoot(float shootTime)
@@ -112,27 +220,27 @@ public class Character : MonoBehaviour
     }
     // 스킬1 : 5초간 공격속도 2배 증가
     public IEnumerator Skill1() {
-        Stats.fireRate = Stats.fireRate/2;
+        fireRate = fireRate/2;
         yield return new WaitForSeconds(5);
-        Stats.fireRate = Stats.fireRate*2;
+        fireRate = fireRate*2;
     }
     // 스킬2 : 5초간 공격력 2배 증가
     public IEnumerator Skill2() {
-        Stats.damage = Stats.damage*2;
+        damage = damage*2;
         yield return new WaitForSeconds(5);
-        Stats.damage = Stats.damage/2;
+        damage = damage/2;
     }
     // 스킬3 : 미정
     public IEnumerator Skill3() {
-        Stats.damage = Stats.damage*2;
+        damage = damage*2;
         yield return new WaitForSeconds(5);
-        Stats.damage = Stats.damage/2;
+        damage = damage/2;
     }
     // 스킬4 : 미정
     public IEnumerator Skill4() {
-        Stats.damage = Stats.damage*2;
+        damage = damage*2;
         yield return new WaitForSeconds(5);
-        Stats.damage = Stats.damage/2;
+        damage = damage/2;
     }
     public void TakeDamage(float damage) // 캐릭터 데미지 받는 함수.
     {
